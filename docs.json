@@ -67,7 +67,8 @@
         "expanded": true,
         "pages": [
           "integrations/overview",
-          "channels/telegram"
+          "channels/telegram",
+          "integrations/composio"
         ]
       },
       {
@@ -76,6 +77,7 @@
         "expanded": true,
         "pages": [
           "inbox/handoffs-bookings-tasks",
+          "operations/activity-and-notifications",
           "billing/credits-and-plans",
           "troubleshooting/common-issues"
         ]
@@ -86,7 +88,9 @@
         "expanded": false,
         "pages": [
           "api-reference/authentication",
-          "api-reference/endpoints"
+          "api-reference/endpoints",
+          "api-reference/models-and-tools",
+          "api-reference/workflow-reference"
         ]
       }
     ]

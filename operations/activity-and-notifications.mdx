@@ -1,0 +1,58 @@
+---
+title: Activity and notifications
+sidebarTitle: Activity and notifications
+description: Track workspace events and actionable alerts.
+---
+
+Activity shows what happened in the workspace. Notifications highlight items that need attention, such as billing alerts or reconnection prompts.
+
+## Activity feed
+
+Use `GET /activity` to list workspace events.
+
+Common filters:
+
+| Query | Description |
+| --- | --- |
+| `actorType` | `user`, `agent`, `workflow`, or `system` |
+| `actorId` | Filter to one actor |
+| `action` | Filter to one action |
+| `targetType` | Filter to one target kind |
+| `limit` | Default `100`, max `200` |
+| `offset` | Pagination offset |
+
+Common activity actions include:
+
+- `tool.executed`
+- `agent.turn`
+- `agent.created`
+- `skill.created`
+- `skill.updated`
+- `skill.deleted`
+- `file.uploaded`
+- `knowledge.recrawled`
+- `integration.connected`
+- `workflow.executed`
+
+## Notifications
+
+| Method | Path | Purpose |
+| --- | --- | --- |
+| `GET` | `/notifications` | List notifications |
+| `POST` | `/notifications/:id/read` | Mark one notification as read |
+
+Useful query parameters:
+
+| Query | Description |
+| --- | --- |
+| `unreadOnly` | Set to `true` to show unread notifications only |
+| `limit` | 1 to 100, default 50 |
+
+## When to use each one
+
+| Need | Use |
+| --- | --- |
+| Debug what an AI employee did | Activity |
+| Audit a workflow run | Activity |
+| See re-auth prompts | Notifications |
+| Confirm billing warnings | Notifications |

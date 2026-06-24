@@ -4,7 +4,11 @@ sidebarTitle: Endpoints
 description: Customer-facing Praxic API endpoint summary.
 ---
 
-This page summarizes the main customer-facing API routes. Admin-only operator routes are intentionally excluded.
+This page summarizes the main customer-facing API routes. Admin-only operator routes are intentionally excluded unless they explain a customer-visible product flow.
+
+<Note>
+  Normal customer routes use the signed-in session cookie and active workspace. They are not bearer-token API routes today.
+</Note>
 
 ## Health and waitlist
 
@@ -18,16 +22,16 @@ This page summarizes the main customer-facing API routes. Admin-only operator ro
 | Method | Path | Purpose |
 | --- | --- | --- |
 | `GET` | `/agent/tools` | List native tools |
-| `POST` | `/agent/chat` | Legacy or default agent chat endpoint |
+| `POST` | `/agent/chat` | Run an ad-hoc one-turn agent chat |
 | `GET` | `/agents` | List AI employees |
 | `POST` | `/agents` | Create an AI employee |
 | `GET` | `/agents/:id` | Get one AI employee |
 | `PATCH` | `/agents/:id` | Update an AI employee |
 | `DELETE` | `/agents/:id` | Delete an AI employee |
 | `PUT` | `/agents/:id/skills` | Set employee skills |
-| `POST` | `/agents/:id/chat` | Chat with an employee |
-| `GET` | `/agents/:id/messages` | List messages |
-| `DELETE` | `/agents/:id/messages` | Clear messages |
+| `POST` | `/agents/:id/chat` | Chat with a saved employee |
+| `GET` | `/agents/:id/messages` | List your messages with an employee |
+| `DELETE` | `/agents/:id/messages` | Clear your messages with an employee |
 | `GET` | `/agent-templates` | List AI employee templates |
 | `GET` | `/llm/models` | List supported models |
 
@@ -43,11 +47,14 @@ This page summarizes the main customer-facing API routes. Admin-only operator ro
 | `POST` | `/knowledge/:id/documents/url` | Add URL document |
 | `POST` | `/knowledge/:id/documents/upload` | Upload document file |
 | `GET` | `/knowledge/:id/documents` | List documents |
-| `PUT` | `/knowledge/:id/documents/:docId` | Update document |
+| `PUT` | `/knowledge/:id/documents/:docId` | Update text document |
 | `POST` | `/knowledge/:id/documents/:docId/retry` | Retry ingestion |
 | `POST` | `/knowledge/:id/documents/:docId/recrawl` | Recrawl URL document |
 | `POST` | `/knowledge/:id/documents/:docId/move` | Move document |
 | `DELETE` | `/knowledge/:id/documents/:docId` | Delete document |
+| `GET` | `/knowledge/sources/stale` | List stale URL sources |
+| `GET` | `/knowledge/suggestions` | List knowledge suggestions |
+| `PATCH` | `/knowledge/suggestions/:id` | Address or dismiss suggestion |
 | `GET` | `/skills` | List skills |
 | `POST` | `/skills` | Create skill |
 | `GET` | `/skills/:id` | Get skill |
@@ -59,34 +66,38 @@ This page summarizes the main customer-facing API routes. Admin-only operator ro
 | Method | Path | Purpose |
 | --- | --- | --- |
 | `GET` | `/workflows` | List workflows |
-| `POST` | `/workflows` | Create workflow |
-| `GET` | `/workflows/nodes` | List node types |
+| `POST` | `/workflows` | Create workflow, operator-controlled today |
+| `GET` | `/workflows/nodes` | List node types, operator-controlled today |
 | `GET` | `/workflows/:id` | Get workflow |
-| `PATCH` | `/workflows/:id` | Update workflow |
-| `DELETE` | `/workflows/:id` | Delete workflow |
+| `PATCH` | `/workflows/:id` | Pause, resume, or update allowed agents |
+| `DELETE` | `/workflows/:id` | Delete workflow, operator-controlled today |
 | `GET` | `/workflows/:id/runs` | List runs |
 | `POST` | `/workflows/:id/run` | Run workflow manually |
 | `POST` | `/workflows/webhook/:token` | Trigger a workflow webhook |
-| `GET` | `/workflow-templates` | List templates |
+| `GET` | `/workflow-templates` | List workflow templates |
 
 ## Integrations and channels
 
 | Method | Path | Purpose |
 | --- | --- | --- |
 | `GET` | `/integrations` | List native integrations |
-| `POST` | `/integrations/:provider/connect` | Connect by API key |
+| `POST` | `/integrations/:provider/api-key` | Connect an API-key provider |
 | `GET` | `/integrations/:provider/connect` | Start OAuth |
 | `GET` | `/integrations/:provider/callback` | OAuth callback |
 | `DELETE` | `/integrations/:provider` | Disconnect provider |
 | `GET` | `/composio/toolkits` | List toolkits |
 | `GET` | `/composio/toolkits/:toolkit/tools` | List toolkit tools |
+| `GET` | `/composio/toolkits/:toolkit/capabilities` | List toolkit capabilities |
 | `GET` | `/composio/connections` | List connections |
-| `POST` | `/composio/:toolkit/connect` | Connect toolkit |
+| `POST` | `/composio/:toolkit/connect` | Start toolkit connection |
+| `GET` | `/composio/:toolkit/connect` | Start OAuth toolkit connection |
+| `POST` | `/composio/:toolkit/connect/api-key` | Submit toolkit API-key fields |
 | `DELETE` | `/composio/:toolkit` | Disconnect toolkit |
 | `GET` | `/channels` | List channels |
 | `POST` | `/channels/:channel` | Connect channel |
-| `PATCH` | `/channels/:id` | Update channel |
+| `PATCH` | `/channels/:id` | Update channel allowlists |
 | `DELETE` | `/channels/:id` | Delete channel |
+| `POST` | `/channels/:channel/webhook` | Provider-authenticated inbound webhook |
 
 ## Inbox, billing, and activity
 
@@ -96,8 +107,10 @@ This page summarizes the main customer-facing API routes. Admin-only operator ro
 | `POST` | `/tasks` | Create task |
 | `PATCH` | `/tasks/:id/status` | Update task status |
 | `GET` | `/handoffs` | List handoffs |
+| `GET` | `/handoffs/open-count` | Count open handoffs |
 | `PATCH` | `/handoffs/:id/close` | Close handoff |
 | `GET` | `/bookings` | List bookings |
+| `GET` | `/bookings/open-count` | Count open bookings |
 | `PATCH` | `/bookings/:id/close` | Close booking |
 | `POST` | `/content/drafts` | Generate content drafts |
 | `GET` | `/content/drafts` | List content drafts |
@@ -105,10 +118,16 @@ This page summarizes the main customer-facing API routes. Admin-only operator ro
 | `POST` | `/content/drafts/:id/schedule` | Schedule content draft |
 | `POST` | `/lead-research/lists` | Create lead research list |
 | `GET` | `/lead-research/lists` | List lead research lists |
+| `GET` | `/lead-research/lists/:id` | Get one lead research list |
 | `GET` | `/activity` | List activity |
 | `GET` | `/notifications` | List notifications |
 | `POST` | `/notifications/:id/read` | Mark notification read |
 | `GET` | `/credits` | Get credit balance |
 | `GET` | `/credits/log` | List credit transactions |
+| `POST` | `/billing/checkout` | Start subscription checkout |
+| `POST` | `/billing/topup` | Start credit top-up checkout |
+| `POST` | `/billing/portal` | Open billing portal |
 | `GET` | `/billing/plan` | Get plan |
 | `GET` | `/billing/settings` | Get billing settings |
+| `POST` | `/billing/auto-recharge/setup-intent` | Start auto-recharge payment setup |
+| `PUT` | `/billing/auto-recharge` | Update auto-recharge settings |

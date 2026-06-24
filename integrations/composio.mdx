@@ -1,0 +1,52 @@
+---
+title: Composio toolkits
+sidebarTitle: Composio
+description: Connect long-tail app toolkits and make their tools available to AI employees.
+---
+
+Composio expands Praxic beyond the native connectors. Use it when your AI employee needs access to an app that is not built into Praxic as a first-party integration.
+
+## How it works
+
+1. Connect a toolkit at the workspace level.
+2. Review the tools available inside that toolkit.
+3. Add specific Composio tool slugs to an AI employee or skill.
+4. The employee can call those tools during chat, workflows, and channel conversations.
+
+<Note>
+  Workspace connection and employee permission are separate. A toolkit can be connected but unavailable to an employee until you enable the specific tool slug.
+</Note>
+
+## Browse toolkits
+
+| Method | Path | Purpose |
+| --- | --- | --- |
+| `GET` | `/composio/toolkits` | List toolkits with connection state |
+| `GET` | `/composio/toolkits/:toolkit/tools` | List tools in a toolkit |
+| `GET` | `/composio/toolkits/:toolkit/capabilities` | List plain-language capabilities |
+| `GET` | `/composio/connections` | List connected toolkits |
+
+## Connect a toolkit
+
+| Method | Path | Purpose |
+| --- | --- | --- |
+| `POST` | `/composio/:toolkit/connect` | Start a JSON connection flow |
+| `GET` | `/composio/:toolkit/connect` | Start a browser OAuth redirect |
+| `POST` | `/composio/:toolkit/connect/api-key` | Submit API-key fields |
+| `DELETE` | `/composio/:toolkit` | Disconnect a toolkit |
+
+A connection flow may return a `redirectUrl` for OAuth or fields to collect for API-key based tools.
+
+## Best practices
+
+- Enable only the Composio tools the employee needs.
+- Put common tool permissions into a skill when several employees need the same app access.
+- Test a connected toolkit with a simple employee chat before using it in a workflow.
+
+## Troubleshooting
+
+| Symptom | Likely cause | Fix |
+| --- | --- | --- |
+| Toolkit appears disconnected | OAuth or API key was not completed | Reconnect the toolkit |
+| Employee says the tool is unavailable | Tool slug is not enabled on the employee or skill | Add the Composio tool slug |
+| API-key flow fails | Required API-key fields are missing | Re-enter every requested field |

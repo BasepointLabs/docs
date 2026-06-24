@@ -1,0 +1,36 @@
+# Praxic Docs
+
+Customer-facing documentation for Praxic, Basepoint's AI employee platform.
+
+## Core pages
+
+- /: Praxic documentation home and task entry points.
+- /getting-started/quickstart: Build your first AI employee, add knowledge, connect tools, and test the result.
+- /concepts/core-concepts: Workspaces, AI employees, knowledge, tools, workflows, channels, inbox, and credits.
+
+## Build
+
+- /build/ai-employees: Create and configure saved AI employees.
+- /build/knowledge-bases: Add text, URL, and file knowledge sources.
+- /build/skills: Reusable instructions and tool bundles for employees.
+- /build/workflows: Automations with triggers, employee steps, tool steps, and run history.
+
+## Integrations and channels
+
+- /integrations/overview: Native integrations, OAuth, API keys, and tool permissions.
+- /integrations/composio: Long-tail Composio toolkits and toolkit connection flows.
+- /channels/telegram: Connect Telegram and control allowed senders.
+
+## Operations
+
+- /inbox/handoffs-bookings-tasks: Tasks, human handoffs, bookings, content drafts, and lead research.
+- /operations/activity-and-notifications: Workspace activity feed and actionable notifications.
+- /billing/credits-and-plans: Plans, credit balance, top-ups, portal, and auto-recharge.
+- /troubleshooting/common-issues: Common setup, integration, knowledge, workflow, and billing issues.
+
+## API reference
+
+- /api-reference/authentication: Cookie session auth, active workspace scoping, and public webhook exceptions.
+- /api-reference/endpoints: Customer-facing endpoint summary.
+- /api-reference/models-and-tools: Model catalog, native tools, Composio tools, and permission model.
+- /api-reference/workflow-reference: Workflow triggers, node types, run states, templates, and webhooks.
