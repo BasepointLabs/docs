@@ -1,0 +1,57 @@
+---
+title: Models and tools
+sidebarTitle: Models and tools
+description: Understand model choices, native tools, Composio tools, and permissions.
+---
+
+AI employees use a model plus a set of enabled tools. Keep the model matched to the task and only enable the tools the employee should use.
+
+## Models
+
+Use `GET /llm/models` to list the models available to the active workspace.
+
+The response includes provider, model id, label, tier, context window, guidance, and whether the provider is configured.
+
+| Provider | Example model ids |
+| --- | --- |
+| `openai` | `gpt-5.4-nano`, `gpt-5.4-mini`, `gpt-5.4`, `gpt-5.5` |
+| `anthropic` | `claude-haiku-4-5`, `claude-sonnet-4-6`, `claude-opus-4-8` |
+
+<Note>
+  Model availability can depend on your plan. Lower tiers may only expose budget models.
+</Note>
+
+## Native tool groups
+
+Use `GET /agent/tools` to list native tools available to your workspace.
+
+| Group | Examples |
+| --- | --- |
+| Human workflow | `handoff_to_human`, `collect_appointment_request` |
+| Tasks | `create_task`, `list_tasks`, `set_task_status` |
+| Workflows | `list_workflows`, `trigger_workflow` |
+| Knowledge | `search_knowledge_base`, `recrawl_knowledge_source`, `suggest_knowledge_update` |
+| Content and sales | `generate_content_drafts`, `research_prospects`, `record_lead` |
+| Web | `web_search`, `web_scrape`, `web_extract`, `web_map`, `web_crawl` |
+| Native integrations | Slack, Gmail, Google Sheets, Linear tools |
+
+## Composio tools
+
+Composio tools use remote tool slugs from the connected toolkit. Add them through `enabledComposioTools` on an employee or skill.
+
+## Permission model
+
+| Layer | What it controls |
+| --- | --- |
+| Workspace connection | Whether Praxic has credentials for an app |
+| Employee enabled tools | Which native tools an employee can call |
+| Employee enabled Composio tools | Which remote Composio tools an employee can call |
+| Skills | Reusable tool and instruction bundles merged into an employee |
+
+## Common issues
+
+| Issue | Fix |
+| --- | --- |
+| Tool is enabled but fails | Check the workspace integration connection |
+| Tool does not appear | It may be disabled for the workspace or plan |
+| Composio tool slug fails | Confirm the toolkit is connected and the slug matches the toolkit catalog |

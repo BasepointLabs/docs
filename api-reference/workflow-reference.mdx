@@ -1,0 +1,61 @@
+---
+title: Workflow reference
+sidebarTitle: Workflow reference
+description: Triggers, nodes, run states, templates, and webhook behavior for Praxic workflows.
+---
+
+Workflows run repeatable processes with triggers, AI employee steps, tool steps, and run history.
+
+## Trigger types
+
+| Trigger | Use it for | Required fields |
+| --- | --- | --- |
+| `manual` | Run on demand | None |
+| `schedule` | Run on a cron schedule | `cron`, `timezone` |
+| `event` | Run when Praxic receives a named event | `eventKey` |
+| `agent` | Let allowlisted employees trigger the workflow | `allowedAgentIds` |
+
+## Public webhook trigger
+
+Use `POST /workflows/webhook/:token` to trigger a workflow from an external system.
+
+The request body can be any JSON payload. Praxic enqueues the run and returns:
+
+```json
+{ "enqueued": true, "workflowId": "workflow_id" }
+```
+
+The token in the path is the authentication mechanism. Keep it private and rotate it if it is exposed.
+
+## Step kinds
+
+| Step kind | What it does |
+| --- | --- |
+| `agent` | Runs a saved AI employee with input |
+| `action` | Runs one native or Composio tool directly |
+
+## Graph rules
+
+Workflow graphs must be valid before they can run.
+
+- Node ids must be unique.
+- Node names must be unique.
+- Edges must point to existing nodes.
+- Every node must be reachable from the trigger.
+- Cycles are not allowed.
+- Large graphs are limited by product guardrails.
+
+## Run statuses
+
+| Status | Meaning |
+| --- | --- |
+| `pending` | The run is queued |
+| `running` | Praxic is executing the run |
+| `succeeded` | Every required step completed |
+| `failed` | A step or preflight check failed |
+
+## Templates
+
+Use `GET /workflow-templates` to list workflow templates available to your workspace.
+
+Template install and clone endpoints are operator-managed today, so customers normally choose templates through the product or assisted onboarding.
