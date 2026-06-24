@@ -1,0 +1,61 @@
+---
+title: Integrations overview
+sidebarTitle: Overview
+description: Connect third-party apps and grant AI employees access to the tools they need.
+---
+
+Integrations connect Praxic to the apps your team already uses.
+
+## Connection model
+
+Connections are managed at the workspace level. After a workspace connects an app, you can grant specific AI employees or workflows access to specific tools.
+
+This avoids reconnecting the same account for every employee.
+
+## Native integrations
+
+Native integrations live under `/integrations`. Some providers use OAuth. Others use an API key.
+
+For API key providers, the request body contains:
+
+| Field | Description |
+| --- | --- |
+| `apiKey` | The provider API key |
+
+## Composio toolkits
+
+Composio expands the number of apps and tool actions available to Praxic. You can browse toolkits, inspect available tools, connect a toolkit, and then enable specific tool slugs on an AI employee.
+
+## Recommended setup flow
+
+<Steps>
+  <Step title="Connect the app at workspace level">
+    Use the integration or Composio connection flow to authorize the account.
+  </Step>
+  <Step title="Review the available tools">
+    Browse the tool list and choose only the actions the AI employee needs.
+  </Step>
+  <Step title="Enable tools on the employee">
+    Add native tool names or Composio tool slugs to the employee configuration.
+  </Step>
+  <Step title="Test with a safe task">
+    Ask the employee to explain what it would do before allowing high-impact actions.
+  </Step>
+</Steps>
+
+## API endpoints
+
+| Method | Path | Purpose |
+| --- | --- | --- |
+| `GET` | `/integrations` | List native integration statuses |
+| `POST` | `/integrations/:provider/connect` | Connect an API key provider |
+| `GET` | `/integrations/:provider/connect` | Start an OAuth connection |
+| `GET` | `/integrations/:provider/callback` | OAuth callback |
+| `DELETE` | `/integrations/:provider` | Disconnect a provider |
+| `GET` | `/composio/toolkits` | List Composio toolkits |
+| `GET` | `/composio/toolkits/:toolkit/tools` | List tools in a toolkit |
+| `GET` | `/composio/toolkits/:toolkit/capabilities` | List mapped capabilities |
+| `GET` | `/composio/connections` | List Composio connections |
+| `POST` | `/composio/:toolkit/connect` | Connect a toolkit |
+| `GET` | `/composio/:toolkit/connect` | Start a toolkit connection flow |
+| `DELETE` | `/composio/:toolkit` | Disconnect a toolkit |

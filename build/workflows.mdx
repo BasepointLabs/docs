@@ -1,0 +1,64 @@
+---
+title: Workflows
+sidebarTitle: Workflows
+description: Automate repeatable work with triggers, AI employees, actions, and run history.
+---
+
+Workflows turn repeatable processes into automations. A workflow has a trigger, steps, and run history.
+
+<Note>
+  Some workflow authoring actions are operator controlled today. Workspace members can view workflows, run them, pause or resume them, and choose which AI employees may trigger them.
+</Note>
+
+## Trigger types
+
+Praxic supports multiple trigger types through its trigger registry. Customer-facing triggers include:
+
+- Schedule based triggers with cron and timezone
+- Event based triggers with an `eventKey`
+- Agent based triggers with `allowedAgentIds`
+- Webhook style triggers where supported by the workspace setup
+
+A scheduled workflow requires a 5-field cron expression, such as `0 9 * * 1` for Monday at 9:00.
+
+## Steps
+
+A workflow can contain up to 20 nodes. Nodes can be agent steps or action steps.
+
+Workflow graphs must follow these rules:
+
+- Every node has a unique ID
+- Every node has a unique name
+- Edges connect real nodes
+- Every node is reachable from the trigger
+- Cycles are not allowed
+
+## Passing data between steps
+
+Node names can be referenced by later steps. Use clear names such as `Research lead`, `Draft email`, or `Create task` so outputs are easy to understand.
+
+## Run history
+
+Each run records its status:
+
+- `pending`
+- `running`
+- `succeeded`
+- `failed`
+
+Use run history to debug workflows and confirm automations completed.
+
+## API endpoints
+
+| Method | Path | Purpose |
+| --- | --- | --- |
+| `GET` | `/workflows` | List workflows |
+| `POST` | `/workflows` | Create a workflow |
+| `GET` | `/workflows/nodes` | List available node types |
+| `GET` | `/workflows/:id` | Get one workflow |
+| `PATCH` | `/workflows/:id` | Update a workflow |
+| `DELETE` | `/workflows/:id` | Delete a workflow |
+| `GET` | `/workflows/:id/runs` | List workflow runs |
+| `POST` | `/workflows/:id/run` | Run a workflow manually |
+| `POST` | `/workflows/webhook/:token` | Trigger a token-protected workflow webhook |
+| `GET` | `/workflow-templates` | List workflow templates |

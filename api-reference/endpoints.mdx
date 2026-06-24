@@ -1,0 +1,114 @@
+---
+title: Endpoint reference
+sidebarTitle: Endpoints
+description: Customer-facing Praxic API endpoint summary.
+---
+
+This page summarizes the main customer-facing API routes. Admin-only operator routes are intentionally excluded.
+
+## Health and waitlist
+
+| Method | Path | Purpose |
+| --- | --- | --- |
+| `GET` | `/health` | Check service health |
+| `POST` | `/waitlist` | Join the marketing waitlist |
+
+## AI employees and chat
+
+| Method | Path | Purpose |
+| --- | --- | --- |
+| `GET` | `/agent/tools` | List native tools |
+| `POST` | `/agent/chat` | Legacy or default agent chat endpoint |
+| `GET` | `/agents` | List AI employees |
+| `POST` | `/agents` | Create an AI employee |
+| `GET` | `/agents/:id` | Get one AI employee |
+| `PATCH` | `/agents/:id` | Update an AI employee |
+| `DELETE` | `/agents/:id` | Delete an AI employee |
+| `PUT` | `/agents/:id/skills` | Set employee skills |
+| `POST` | `/agents/:id/chat` | Chat with an employee |
+| `GET` | `/agents/:id/messages` | List messages |
+| `DELETE` | `/agents/:id/messages` | Clear messages |
+| `GET` | `/agent-templates` | List AI employee templates |
+| `GET` | `/llm/models` | List supported models |
+
+## Knowledge and skills
+
+| Method | Path | Purpose |
+| --- | --- | --- |
+| `POST` | `/knowledge` | Create a knowledge base |
+| `GET` | `/knowledge` | List knowledge bases |
+| `GET` | `/knowledge/:id` | Get one knowledge base |
+| `DELETE` | `/knowledge/:id` | Delete a knowledge base |
+| `POST` | `/knowledge/:id/documents` | Add text document |
+| `POST` | `/knowledge/:id/documents/url` | Add URL document |
+| `POST` | `/knowledge/:id/documents/upload` | Upload document file |
+| `GET` | `/knowledge/:id/documents` | List documents |
+| `PUT` | `/knowledge/:id/documents/:docId` | Update document |
+| `POST` | `/knowledge/:id/documents/:docId/retry` | Retry ingestion |
+| `POST` | `/knowledge/:id/documents/:docId/recrawl` | Recrawl URL document |
+| `POST` | `/knowledge/:id/documents/:docId/move` | Move document |
+| `DELETE` | `/knowledge/:id/documents/:docId` | Delete document |
+| `GET` | `/skills` | List skills |
+| `POST` | `/skills` | Create skill |
+| `GET` | `/skills/:id` | Get skill |
+| `PATCH` | `/skills/:id` | Update skill |
+| `DELETE` | `/skills/:id` | Delete skill |
+
+## Workflows
+
+| Method | Path | Purpose |
+| --- | --- | --- |
+| `GET` | `/workflows` | List workflows |
+| `POST` | `/workflows` | Create workflow |
+| `GET` | `/workflows/nodes` | List node types |
+| `GET` | `/workflows/:id` | Get workflow |
+| `PATCH` | `/workflows/:id` | Update workflow |
+| `DELETE` | `/workflows/:id` | Delete workflow |
+| `GET` | `/workflows/:id/runs` | List runs |
+| `POST` | `/workflows/:id/run` | Run workflow manually |
+| `POST` | `/workflows/webhook/:token` | Trigger a workflow webhook |
+| `GET` | `/workflow-templates` | List templates |
+
+## Integrations and channels
+
+| Method | Path | Purpose |
+| --- | --- | --- |
+| `GET` | `/integrations` | List native integrations |
+| `POST` | `/integrations/:provider/connect` | Connect by API key |
+| `GET` | `/integrations/:provider/connect` | Start OAuth |
+| `GET` | `/integrations/:provider/callback` | OAuth callback |
+| `DELETE` | `/integrations/:provider` | Disconnect provider |
+| `GET` | `/composio/toolkits` | List toolkits |
+| `GET` | `/composio/toolkits/:toolkit/tools` | List toolkit tools |
+| `GET` | `/composio/connections` | List connections |
+| `POST` | `/composio/:toolkit/connect` | Connect toolkit |
+| `DELETE` | `/composio/:toolkit` | Disconnect toolkit |
+| `GET` | `/channels` | List channels |
+| `POST` | `/channels/:channel` | Connect channel |
+| `PATCH` | `/channels/:id` | Update channel |
+| `DELETE` | `/channels/:id` | Delete channel |
+
+## Inbox, billing, and activity
+
+| Method | Path | Purpose |
+| --- | --- | --- |
+| `GET` | `/tasks` | List tasks |
+| `POST` | `/tasks` | Create task |
+| `PATCH` | `/tasks/:id/status` | Update task status |
+| `GET` | `/handoffs` | List handoffs |
+| `PATCH` | `/handoffs/:id/close` | Close handoff |
+| `GET` | `/bookings` | List bookings |
+| `PATCH` | `/bookings/:id/close` | Close booking |
+| `POST` | `/content/drafts` | Generate content drafts |
+| `GET` | `/content/drafts` | List content drafts |
+| `PATCH` | `/content/drafts/:id/review` | Review content draft |
+| `POST` | `/content/drafts/:id/schedule` | Schedule content draft |
+| `POST` | `/lead-research/lists` | Create lead research list |
+| `GET` | `/lead-research/lists` | List lead research lists |
+| `GET` | `/activity` | List activity |
+| `GET` | `/notifications` | List notifications |
+| `POST` | `/notifications/:id/read` | Mark notification read |
+| `GET` | `/credits` | Get credit balance |
+| `GET` | `/credits/log` | List credit transactions |
+| `GET` | `/billing/plan` | Get plan |
+| `GET` | `/billing/settings` | Get billing settings |

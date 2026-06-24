@@ -1,0 +1,43 @@
+---
+title: Skills
+sidebarTitle: Skills
+description: Package reusable instructions, tools, and knowledge for AI employees.
+---
+
+Skills are reusable capability bundles. They help you apply the same setup to multiple AI employees without copying fields by hand.
+
+## What a skill can include
+
+A skill can include:
+
+- Name and description
+- Additional instructions
+- Native tool names
+- Composio tool slugs
+- Knowledge document assignments
+
+Use skills for repeatable responsibilities such as sales qualification, support triage, content drafting, or CRM updates.
+
+## When to use a skill
+
+Create a skill when:
+
+- Multiple AI employees need the same operating rules
+- You want a repeatable setup for a department or workflow
+- You want to manage tool access as a reusable bundle
+- You are standardizing prompts and knowledge for a role
+
+## Apply skills to an AI employee
+
+Use the AI employee skill assignment endpoint to set which skills the employee should use. Praxic merges the skill capabilities into the employee's runtime setup.
+
+## API endpoints
+
+| Method | Path | Purpose |
+| --- | --- | --- |
+| `GET` | `/skills` | List skills |
+| `POST` | `/skills` | Create a skill |
+| `GET` | `/skills/:id` | Get one skill |
+| `PATCH` | `/skills/:id` | Update a skill |
+| `DELETE` | `/skills/:id` | Delete a skill |
+| `PUT` | `/agents/:id/skills` | Set skills for an AI employee |

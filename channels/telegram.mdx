@@ -1,0 +1,45 @@
+---
+title: Telegram channel
+sidebarTitle: Telegram
+description: Connect a Telegram channel to an AI employee and manage who can message it.
+---
+
+Channels let an AI employee receive messages outside the Praxic app. Telegram is the primary customer-facing inbound channel exposed in the API.
+
+## How Telegram works
+
+A Telegram connection links an AI employee to a Telegram bot or chat configuration. Incoming Telegram messages are handled by the channel provider and routed to the assigned AI employee.
+
+## Allowlist controls
+
+Use allowlists to control who can send messages to the employee. Keep the allowlist narrow for production agents.
+
+## Common setup flow
+
+<Steps>
+  <Step title="Create or choose an AI employee">
+    Make sure the employee has the right instructions, tools, and knowledge.
+  </Step>
+  <Step title="Connect Telegram">
+    Add the Telegram channel configuration for the workspace.
+  </Step>
+  <Step title="Set the allowlist">
+    Restrict who can message the employee.
+  </Step>
+  <Step title="Send a test message">
+    Verify the employee answers with the expected knowledge and tone.
+  </Step>
+</Steps>
+
+## API endpoints
+
+| Method | Path | Purpose |
+| --- | --- | --- |
+| `GET` | `/channels` | List connected channels |
+| `POST` | `/channels/:channel` | Connect a channel, such as Telegram |
+| `PATCH` | `/channels/:id` | Update channel allowlist settings |
+| `DELETE` | `/channels/:id` | Disconnect a channel |
+
+<Note>
+  Provider webhook endpoints are public and protected by provider-specific secret token checks. You usually do not need to call those webhook endpoints directly.
+</Note>

@@ -1,0 +1,62 @@
+---
+title: Common issues
+sidebarTitle: Common issues
+description: Fix common setup, integration, knowledge, workflow, and billing issues.
+---
+
+Use this page when a Praxic setup does not behave as expected.
+
+## An AI employee gives generic answers
+
+Check these items:
+
+- The employee has assigned `knowledgeDocumentIds`
+- The relevant documents are `ready`
+- The instructions tell the employee to use knowledge first
+- The prompt asks a question covered by the assigned documents
+
+## A document is not searchable
+
+Check the document status:
+
+- `pending`: wait for ingestion to finish
+- `failed`: retry ingestion
+- `needs_ocr`: the file likely needs OCR before Praxic can extract text
+- `ready`: confirm the document is assigned to the employee
+
+## A URL document is outdated
+
+If a URL document is stale, recrawl it manually or set `recrawlEveryHrs` when adding the URL.
+
+## A workflow does not run
+
+Check:
+
+- The workflow is enabled
+- The trigger has required fields, such as `cron` for schedules or `eventKey` for events
+- The graph has at least one node connected to the trigger
+- There are no cycles in the graph
+- Run history shows whether the latest run failed
+
+## A connected app is unavailable to an employee
+
+Connections and permissions are separate.
+
+1. Confirm the workspace integration or Composio toolkit is connected.
+2. Confirm the employee has the required native tool name or Composio tool slug enabled.
+3. Confirm the employee's instructions explain when to use that tool.
+
+## Billing access is blocked
+
+Check the billing plan and access level. A workspace may be `blocked` when subscription billing is unresolved or credits are unavailable.
+
+## Still stuck?
+
+Collect these details before contacting support:
+
+- Workspace name
+- AI employee name
+- Related workflow or document ID
+- Approximate time of the issue
+- Error message or failed run status
+- What you expected to happen

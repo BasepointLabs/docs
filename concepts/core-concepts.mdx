@@ -1,0 +1,64 @@
+---
+title: Core concepts
+sidebarTitle: Core concepts
+description: Understand Praxic workspaces, AI employees, tools, knowledge, workflows, and credits.
+---
+
+Praxic is organized around a few core building blocks.
+
+## Workspace
+
+A workspace is your team's shared Praxic environment. It contains AI employees, knowledge bases, integrations, workflows, tasks, billing, and activity history.
+
+Most resources are workspace-scoped. This means one workspace cannot access another workspace's agents, tools, or documents.
+
+## AI employee
+
+An AI employee is a configured agent with a name, instructions, model, tools, skills, and assigned knowledge.
+
+Use separate AI employees for separate jobs. For example, create one for sales research and another for customer support.
+
+## Tools
+
+Tools are actions the AI employee can call. Praxic supports native tools and connected app tools.
+
+Tools are granted deliberately:
+
+- Native tools are enabled by tool name
+- Composio tools are enabled by tool slug
+- Tool instructions can customize how a specific employee should use a tool
+
+## Knowledge base
+
+A knowledge base is a collection of documents. Documents can be pasted text, uploaded text, or website URLs.
+
+URL documents can be recrawled so the AI employee keeps using fresh information.
+
+## Skill
+
+A skill is a reusable capability bundle. Skills help you package instructions, tools, Composio tools, and knowledge assignments so they can be applied to AI employees consistently.
+
+## Workflow
+
+A workflow is a repeatable automation. It has a trigger, a graph of steps, and run history.
+
+Workflow steps can:
+
+- Ask an AI employee to do work
+- Run an action tool
+- Pass outputs from one step into another step
+
+## Inbox items
+
+Praxic tracks operational work that needs attention:
+
+- **Tasks:** Simple work items
+- **Handoffs:** AI-raised requests for human help
+- **Bookings:** Appointment requests
+- **Content drafts:** AI-generated content that can be reviewed and scheduled
+- **Lead research lists:** Prospect research outputs
+- **Notifications:** Alerts such as billing warnings or re-auth prompts
+
+## Credits and plan
+
+Credits meter paid usage. Your plan controls access, allotments, and billing state. You can view balance, transaction history, billing settings, plan status, and auto-recharge settings.

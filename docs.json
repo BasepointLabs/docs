@@ -1,8 +1,8 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "almond",
-  "name": "Product Guide",
-  "description": "Step-by-step guides for every product—platform setup, analytics, and integrations in one place.",
+  "name": "Praxic Docs",
+  "description": "Customer docs for Praxic AI employees, workflows, integrations, knowledge, and billing.",
   "colors": {
     "primary": "#166E3F",
     "light": "#26BD6C",
@@ -16,7 +16,13 @@
     "eyebrows": "breadcrumbs"
   },
   "contextual": {
-    "options": ["copy", "view", "assistant", "mcp", "add-mcp"]
+    "options": [
+      "copy",
+      "view",
+      "assistant",
+      "mcp",
+      "add-mcp"
+    ]
   },
   "navigation": {
     "global": {
@@ -27,40 +33,32 @@
           "href": "/"
         },
         {
-          "anchor": "Changelog",
-          "icon": "scroll-text",
-          "href": "https://www.mintlify.com/docs/changelog"
-        },
-        {
-          "anchor": "Help",
+          "anchor": "Support",
           "icon": "life-buoy",
-          "href": "https://www.mintlify.com/docs/contact-support"
+          "href": "mailto:support@basepointlabs.com"
         }
       ]
     },
     "directory": "card",
     "groups": [
       {
-        "group": "Platform",
-        "icon": "layers",
+        "group": "Get started",
+        "icon": "rocket",
         "expanded": true,
         "pages": [
-          "platform/quickstart",
-          "platform/key-concepts",
-          "platform/configuration/settings",
-          "platform/configuration/user-management",
-          "platform/administration/roles-permissions"
+          "getting-started/quickstart",
+          "concepts/core-concepts"
         ]
       },
       {
-        "group": "Analytics",
-        "icon": "chart-bar",
+        "group": "Build",
+        "icon": "bot",
         "expanded": true,
         "pages": [
-          "analytics/quickstart",
-          "analytics/connect-data",
-          "analytics/dashboards/create-dashboard",
-          "analytics/reports/scheduled-reports"
+          "build/ai-employees",
+          "build/knowledge-bases",
+          "build/skills",
+          "build/workflows"
         ]
       },
       {
@@ -68,10 +66,27 @@
         "icon": "plug",
         "expanded": true,
         "pages": [
-          "integrations/quickstart",
-          "integrations/authentication",
-          "integrations/connectors/crm",
-          "integrations/webhooks/configure"
+          "integrations/overview",
+          "channels/telegram"
+        ]
+      },
+      {
+        "group": "Operations",
+        "icon": "inbox",
+        "expanded": true,
+        "pages": [
+          "inbox/handoffs-bookings-tasks",
+          "billing/credits-and-plans",
+          "troubleshooting/common-issues"
+        ]
+      },
+      {
+        "group": "API reference",
+        "icon": "code-xml",
+        "expanded": false,
+        "pages": [
+          "api-reference/authentication",
+          "api-reference/endpoints"
         ]
       }
     ]
@@ -84,14 +99,14 @@
     "links": [],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "label": "Praxic",
+      "href": "https://praxic.com"
     }
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/yourcompany",
-      "linkedin": "https://linkedin.com/company/yourcompany"
+      "x": "https://x.com/basepointlabs",
+      "linkedin": "https://linkedin.com/company/basepointlabs"
     }
   }
 }
