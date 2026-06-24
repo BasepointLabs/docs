@@ -1,0 +1,32 @@
+---
+title: Authentication
+sidebarTitle: Authentication
+description: How Praxic API requests are authenticated and scoped.
+---
+
+Praxic uses session-based authentication for the customer app and API routes. Auth routes live under `/api/auth/*` and are handled by Praxic's authentication service.
+
+## Session scope
+
+Most customer API routes require a signed-in user and an active workspace context. Resources are scoped to the workspace, so requests only return data for the caller's organization.
+
+## Public endpoints
+
+A small number of endpoints are public by design:
+
+| Path | Purpose |
+| --- | --- |
+| `/health` | Service health check |
+| `/waitlist` | Marketing waitlist signup |
+| Provider webhooks | Inbound provider callbacks protected by provider-specific checks |
+| `/billing/webhook` | Stripe webhook endpoint protected by Stripe signature verification |
+
+## CORS and credentials
+
+The API is configured for browser requests from the Praxic frontend origin and supports credentialed requests.
+
+## Errors
+
+Invalid request bodies return validation errors. Missing workspace or session context returns an authorization error.
+
+When using the API directly, keep requests tied to a real signed-in session unless your Basepoint team has issued a separate integration mechanism.

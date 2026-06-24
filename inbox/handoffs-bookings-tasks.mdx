@@ -1,0 +1,68 @@
+---
+title: Inbox and human review
+sidebarTitle: Inbox and review
+description: Manage tasks, handoffs, bookings, content drafts, lead research, activity, and notifications.
+---
+
+Praxic gives teams an inbox for work that needs tracking or human review.
+
+## Tasks
+
+Tasks are simple work items created by teammates, AI employees, or workflows.
+
+| Method | Path | Purpose |
+| --- | --- | --- |
+| `GET` | `/tasks` | List tasks |
+| `POST` | `/tasks` | Create a task |
+| `PATCH` | `/tasks/:id/status` | Update task status |
+
+## Handoffs
+
+Handoffs are raised when an AI employee needs human help.
+
+| Method | Path | Purpose |
+| --- | --- | --- |
+| `GET` | `/handoffs` | List handoffs |
+| `GET` | `/handoffs/open-count` | Count open handoffs |
+| `PATCH` | `/handoffs/:id/close` | Close a handoff |
+
+## Bookings
+
+Bookings are appointment requests collected by a receptionist-style AI employee.
+
+| Method | Path | Purpose |
+| --- | --- | --- |
+| `GET` | `/bookings` | List bookings |
+| `GET` | `/bookings/open-count` | Count open bookings |
+| `PATCH` | `/bookings/:id/close` | Close a booking |
+
+## Content drafts
+
+Content drafts support generate, review, and schedule flows.
+
+| Method | Path | Purpose |
+| --- | --- | --- |
+| `POST` | `/content/drafts` | Generate drafts |
+| `GET` | `/content/drafts` | List drafts |
+| `PATCH` | `/content/drafts/:id/review` | Review a draft |
+| `POST` | `/content/drafts/:id/schedule` | Schedule a draft |
+
+## Lead research
+
+Lead research creates prospect lists that can be reviewed later.
+
+| Method | Path | Purpose |
+| --- | --- | --- |
+| `POST` | `/lead-research/lists` | Create a prospect research list |
+| `GET` | `/lead-research/lists` | List prospect lists |
+| `GET` | `/lead-research/lists/:id` | Get one prospect list |
+
+## Activity and notifications
+
+Use activity for workspace history and notifications for actionable alerts.
+
+| Method | Path | Purpose |
+| --- | --- | --- |
+| `GET` | `/activity` | List workspace activity |
+| `GET` | `/notifications` | List notifications |
+| `POST` | `/notifications/:id/read` | Mark a notification as read |

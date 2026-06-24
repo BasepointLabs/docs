@@ -1,0 +1,73 @@
+---
+title: AI employees
+sidebarTitle: AI employees
+description: Create, configure, chat with, and manage Praxic AI employees.
+---
+
+AI employees are the main workers in Praxic. Each one has its own role, instructions, model, tools, knowledge, and chat history.
+
+## Create an AI employee
+
+When creating an AI employee, define:
+
+| Field | What it controls |
+| --- | --- |
+| `name` | The display name teammates see |
+| `description` | A short summary of the employee's job |
+| `instructions` | The system-level rules for behavior and output |
+| `provider` | The model provider |
+| `model` | The specific supported model, if you do not want the default |
+| `enabledTools` | Native Praxic tools this employee may call |
+| `enabledComposioTools` | Connected Composio tool slugs this employee may call |
+| `toolConfig` | Per-tool instructions, such as email tone or formatting |
+| `knowledgeDocumentIds` | Documents the employee may search |
+| `status` | Whether the employee is active |
+
+## Write good instructions
+
+Effective instructions should tell the AI employee:
+
+- Its role and goal
+- What information to use first
+- Which tools it may use and when
+- What it should ask a human to approve
+- How to format outputs
+- What it must not do
+
+<Example>
+  You are the support research assistant for Praxic. Answer from assigned knowledge first. If the answer is not present, say what is missing and create a handoff instead of guessing. Use concise bullets for customer replies.
+</Example>
+
+## Enable tools carefully
+
+Give each employee only the tools required for its job.
+
+Examples:
+
+- A support employee may need knowledge search, handoffs, and ticket tools
+- A sales employee may need lead research, email drafting, and CRM tools
+- A content employee may need content drafts, scheduling, and social tools
+
+## Assign skills
+
+Skills let you reuse a packaged setup across employees. Applying skills can add instructions, tools, Composio tools, and knowledge assignments.
+
+## Chat history
+
+Each employee has message history. You can list the history for review or clear it when you want a fresh context.
+
+## API endpoints
+
+| Method | Path | Purpose |
+| --- | --- | --- |
+| `GET` | `/agents` | List AI employees |
+| `POST` | `/agents` | Create an AI employee |
+| `GET` | `/agents/:id` | Get one AI employee |
+| `PATCH` | `/agents/:id` | Update an AI employee |
+| `DELETE` | `/agents/:id` | Delete an AI employee |
+| `PUT` | `/agents/:id/skills` | Set the employee's skills |
+| `POST` | `/agents/:id/chat` | Chat with an employee |
+| `GET` | `/agents/:id/messages` | List chat messages |
+| `DELETE` | `/agents/:id/messages` | Clear chat messages |
+| `GET` | `/agent/tools` | List native tools |
+| `GET` | `/llm/models` | List supported models |

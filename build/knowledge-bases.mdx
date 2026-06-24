@@ -1,0 +1,98 @@
+---
+title: Knowledge bases
+sidebarTitle: Knowledge bases
+description: Add documents and website pages that AI employees can use.
+---
+
+Knowledge bases give AI employees trusted information to search before they answer or act.
+
+## Supported document sources
+
+Praxic supports these document source types:
+
+- `text`
+- `txt`
+- `md`
+- `docx`
+- `pdf`
+- `url`
+
+Pasted text documents are available immediately. Uploaded and URL documents may go through ingestion first.
+
+## Document status
+
+Documents move through these statuses:
+
+| Status | Meaning |
+| --- | --- |
+| `pending` | Praxic is processing the document |
+| `ready` | The document is searchable |
+| `failed` | Ingestion failed and can be retried |
+| `needs_ocr` | A scanned PDF needs OCR before text can be indexed |
+
+URL documents also have freshness states: `crawling`, `fresh`, `stale`, and `failed`.
+
+## Create a knowledge base
+
+Create one knowledge base per clear topic, department, or use case.
+
+Examples:
+
+- `Support policies`
+- `Sales playbook`
+- `Product documentation`
+- `Customer onboarding SOPs`
+
+## Add text
+
+Use pasted text when the source is short and stable, such as an FAQ or policy snippet.
+
+Required fields:
+
+| Field | Description |
+| --- | --- |
+| `title` | Document title |
+| `text` | Document body |
+
+## Upload a file
+
+Upload files with multipart form data using a `file` field. Supported file types are `.txt`, `.md`, `.docx`, and `.pdf`.
+
+PDFs with no text layer may return `needs_ocr`. Retry with OCR when OCR is enabled for your workspace.
+
+## Add a URL
+
+Use URL documents for pages that should be refreshed.
+
+Fields:
+
+| Field | Description |
+| --- | --- |
+| `url` | Public page URL |
+| `title` | Optional title override |
+| `recrawlEveryHrs` | Optional recrawl cadence from 1 hour to about 90 days |
+
+## Assign documents to an AI employee
+
+After documents are ready, add their IDs to an employee's `knowledgeDocumentIds`. Employees only search the documents assigned to them.
+
+## API endpoints
+
+| Method | Path | Purpose |
+| --- | --- | --- |
+| `POST` | `/knowledge` | Create a knowledge base |
+| `GET` | `/knowledge` | List knowledge bases |
+| `GET` | `/knowledge/:id` | Get one knowledge base |
+| `DELETE` | `/knowledge/:id` | Delete a knowledge base |
+| `POST` | `/knowledge/:id/documents` | Add a pasted text document |
+| `POST` | `/knowledge/:id/documents/url` | Add a URL document |
+| `POST` | `/knowledge/:id/documents/upload` | Upload a `.txt`, `.md`, `.docx`, or `.pdf` file |
+| `GET` | `/knowledge/:id/documents` | List documents |
+| `PUT` | `/knowledge/:id/documents/:docId` | Update a document |
+| `POST` | `/knowledge/:id/documents/:docId/retry` | Retry failed ingestion |
+| `POST` | `/knowledge/:id/documents/:docId/recrawl` | Recrawl a URL document |
+| `POST` | `/knowledge/:id/documents/:docId/move` | Move a document to another base |
+| `DELETE` | `/knowledge/:id/documents/:docId` | Delete a document |
+| `GET` | `/knowledge/sources/stale` | List stale URL sources |
+| `GET` | `/knowledge/suggestions` | List suggested missing knowledge |
+| `PATCH` | `/knowledge/suggestions/:id` | Mark a suggestion addressed or dismissed |

@@ -1,0 +1,66 @@
+---
+title: Credits and plans
+sidebarTitle: Credits and plans
+description: Understand Praxic credit balance, plans, top-ups, and auto-recharge.
+---
+
+Praxic uses credits to meter paid usage. Your plan and billing state control access, credit allotments, and top-ups.
+
+## Plans
+
+Self-serve checkout supports:
+
+- `hobbyist`
+- `business`
+
+Enterprise plans are sales-assisted and are not selected through self-serve checkout.
+
+## Access states
+
+A workspace can have one of these access levels:
+
+| Level | Meaning |
+| --- | --- |
+| `full` | Active or trialing subscription access |
+| `grace` | Past due access that can continue against the existing balance |
+| `blocked` | Access is blocked until billing is resolved |
+
+## Top-ups
+
+You can buy one-time credits. Top-up amounts are bounded by product guardrails.
+
+| Field | Rules |
+| --- | --- |
+| `amountUsd` | Minimum `5`, maximum `5000`, cents allowed |
+
+## Auto-recharge
+
+Auto-recharge can add credits when the balance falls below a threshold.
+
+Fields include:
+
+| Field | Rules |
+| --- | --- |
+| `enabled` | Whether auto-recharge is on |
+| `thresholdUsd` | Minimum `1`, maximum `500` |
+| `amountUsd` | Minimum `5`, maximum `5000` |
+| `setupIntentId` | Payment setup reference |
+| `consentAccepted` | Required to enable off-session charging |
+
+## API endpoints
+
+| Method | Path | Purpose |
+| --- | --- | --- |
+| `GET` | `/credits` | Get current credit balance |
+| `GET` | `/credits/log` | List credit transactions |
+| `POST` | `/billing/checkout` | Start subscription checkout |
+| `POST` | `/billing/topup` | Start credit top-up checkout |
+| `POST` | `/billing/portal` | Open billing portal |
+| `GET` | `/billing/settings` | Get billing settings |
+| `GET` | `/billing/plan` | Get current plan and access state |
+| `POST` | `/billing/auto-recharge/setup-intent` | Start auto-recharge payment setup |
+| `PUT` | `/billing/auto-recharge` | Update auto-recharge settings |
+
+<Note>
+  Stripe webhook endpoints are used by Praxic internally to sync subscriptions and grant credits. Customers normally do not call them directly.
+</Note>
